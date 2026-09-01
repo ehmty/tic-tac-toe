@@ -12,23 +12,25 @@ const Gameboard = (() => {
 })();
 
 const winChecker = function(Gameboard) {
-    winConditions = [[0,1,2],[3,4,5],[6,7,8],
-                     [0,3,6],[1,4,7],[2,5,8],
-                     [0,4,8],[2,4,6]
+    const board = Gameboard.getBoard();
+    const winConditions = [[0,1,2],[3,4,5],[6,7,8],
+                           [0,3,6],[1,4,7],[2,5,8],
+                           [0,4,8],[2,4,6]
                     ];
+
     const isDraw = () => {
-        return !Gameboard.includes("") && !hasWinner();
+        return !board.includes("") && !hasWinner();
     }
 
     const hasWinner = () => {
         for (const win of winConditions) {
-            if (Gameboard[win[0]] === "" ||
-                Gameboard[win[1]] === "" ||
-                Gameboard[win[2]] === ""
+            if (board[win[0]] === "" ||
+                board[win[1]] === "" ||
+                board[win[2]] === ""
             ) continue;
 
-            if (Gameboard[win[0]] === Gameboard[win[1]] &&
-                Gameboard[win[0]] === Gameboard[win[2]]
+            if (board[win[0]] === board[win[1]] &&
+                board[win[0]] === board[win[2]]
             ) {
                 return true;
             }
@@ -42,7 +44,7 @@ const winChecker = function(Gameboard) {
 const Game = function(createPlayer, Gameboard, winChecker) {
     const player1 = createPlayer("p1", "x");
     const player2 = createPlayer("p2", "o");
-
+    const board = Gameboard.getBoard();
     const {isDraw, hasWinner} = winChecker(Gameboard);
 
     let currentPlayer = player1;
@@ -50,8 +52,8 @@ const Game = function(createPlayer, Gameboard, winChecker) {
     const setCurrentPlayer = (playerObj) => { currentPlayer = playerObj };
 
     const setMarker = (position, player) => {
-        if (Gameboard[position] !== "" || position > 8) return;
-        Gameboard[position] = player.marker;
+        if (board[position] !== "" || position > 8) return;
+        board[position] = player.marker;
     };
 
     return {player1, player2, getCurrentPlayer, setCurrentPlayer, setMarker, isDraw, hasWinner};
@@ -61,7 +63,7 @@ const game1 = Game(createPlayer, Gameboard, winChecker);
 
 const displayController = function() {
     let currentPlayer = game1.getCurrentPlayer();
-    console.log(Gameboard);
+    console.log(Gameboard.getBoard());
     console.log(currentPlayer);
 };
 
