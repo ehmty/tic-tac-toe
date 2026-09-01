@@ -6,7 +6,7 @@ const createPlayer = function(name, marker) {
 };
 
 const Gameboard = (() => {
-    const board = ["","","","","","","","",""];
+    const board = ["","x","","","","","","",""];
     const getBoard = () => board;
     const setMarker = (position, marker) => {
         if (board[position] !== "" || position > 8) return;
@@ -53,7 +53,7 @@ const Game = function(createPlayer, Gameboard, winChecker) {
 
     let currentPlayer = player1;
     const getCurrentPlayer = () => currentPlayer;
-    const setCurrentPlayer = (playerObj) => { currentPlayer = playerObj };
+    const setCurrentPlayer = () => { currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1; };
 
     return {player1, player2, getCurrentPlayer, setCurrentPlayer, isDraw, hasWinner};
 };
@@ -62,7 +62,11 @@ const game1 = Game(createPlayer, Gameboard, winChecker);
 
 const displayController = function() {
     let currentPlayer = game1.getCurrentPlayer();
-    console.log(Gameboard.getBoard());
-    console.log(currentPlayer);
+    const board = Gameboard.getBoard();
+    const grid = document.querySelectorAll(".grid div");
+    grid.forEach((div, i) => {
+        div.textContent = board[i];
+    });
 };
 
+displayController();
