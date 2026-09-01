@@ -1,0 +1,32 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    margin: 1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    width: 300px;
+    margin: 0 auto;
+}
+
+.grid div {
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid div:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
