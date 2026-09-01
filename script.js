@@ -38,3 +38,21 @@ const winChecker = function(Gameboard) {
 
     return {isDraw, hasWinner };
 }
+
+const Game = function(createPlayer, Gameboard, winChecker) {
+    const player1 = createPlayer("p1", "x");
+    const player2 = createPlayer("p2", "o");
+
+    const {isDraw, hasWinner} = winChecker(Gameboard);
+
+    let currentPlayer = player1;
+    const getCurrentPlayer = () => currentPlayer;
+    const setCurrentPlayer = (playerObj) => { currentPlayer = playerObj };
+
+    const setMarker = (position, player) => {
+        if (Gameboard[position] !== "" || position > 8) return;
+        Gameboard[position] = player.marker;
+    };
+
+    return {player1, player2, getCurrentPlayer, setCurrentPlayer, setMarker, isDraw, hasWinner};
+};
