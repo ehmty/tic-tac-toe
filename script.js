@@ -56,3 +56,12 @@ const Game = function(createPlayer, Gameboard, winChecker) {
 
     return {player1, player2, getCurrentPlayer, setCurrentPlayer, setMarker, isDraw, hasWinner};
 };
+
+const game1 = Game(createPlayer, Gameboard, winChecker);
+
+const displayController = function() {
+    let currentPlayer = game1.getCurrentPlayer();
+    console.log(Gameboard);
+    console.log(currentPlayer);
+};
+
