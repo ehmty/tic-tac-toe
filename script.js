@@ -8,7 +8,12 @@ const createPlayer = function(name, marker) {
 const Gameboard = (() => {
     const board = ["","","","","","","","",""];
     const getBoard = () => board;
-    return {getBoard };
+    const setMarker = (position, marker) => {
+        if (board[position] !== "" || position > 8) return;
+        board[position] = marker;
+    };
+
+    return {getBoard, setMarker };
 })();
 
 const winChecker = function(Gameboard) {
@@ -44,19 +49,13 @@ const winChecker = function(Gameboard) {
 const Game = function(createPlayer, Gameboard, winChecker) {
     const player1 = createPlayer("p1", "x");
     const player2 = createPlayer("p2", "o");
-    const board = Gameboard.getBoard();
     const {isDraw, hasWinner} = winChecker(Gameboard);
 
     let currentPlayer = player1;
     const getCurrentPlayer = () => currentPlayer;
     const setCurrentPlayer = (playerObj) => { currentPlayer = playerObj };
 
-    const setMarker = (position, player) => {
-        if (board[position] !== "" || position > 8) return;
-        board[position] = player.marker;
-    };
-
-    return {player1, player2, getCurrentPlayer, setCurrentPlayer, setMarker, isDraw, hasWinner};
+    return {player1, player2, getCurrentPlayer, setCurrentPlayer, isDraw, hasWinner};
 };
 
 const game1 = Game(createPlayer, Gameboard, winChecker);
