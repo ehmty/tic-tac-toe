@@ -56,6 +56,30 @@ const Game = function(createPlayer, Gameboard, winChecker) {
     const getCurrentPlayer = () => currentPlayer;
     const setCurrentPlayer = () => { currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1; };
 
+    const para = document.querySelector("p");
+    const cells = document.querySelectorAll(".grid div");
+    cells.forEach((cell, i) => cell.addEventListener("click", () => {
+        if (gameOver) return;
+        if (!Gameboard.setMarker(i, getCurrentPlayer().marker)) return;
+
+        displayController();
+        
+        if (hasWinner()) {
+            gameOver = true;
+            para.textContent = `${currentPlayer.name} hat gewonnen!`;
+            currentPlayer.setScore();
+            return;
+        };
+
+        if (isDraw()) {
+            gameOver = true;
+            para.textContent = `Draw!`;
+            return;
+        };
+
+        setCurrentPlayer();
+    }));
+
     return {player1, player2, getCurrentPlayer, setCurrentPlayer, isDraw, hasWinner};
 };
 
@@ -68,5 +92,3 @@ const displayController = function() {
         cell.textContent = board[i];
     });
 };
-
-displayController();
