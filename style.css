@@ -5,9 +5,23 @@
     text-align: center;
 }
 
-h1 {
-    text-align: center;
+h1,
+.reset-btn {
     margin: 1rem;
+}
+
+.reset-btn {
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+}
+
+p {
+    border: 2px solid black;
+    height: 1.5rem;
+    width: 150px;
+    text-align: center;
+    margin: 1rem auto;
 }
 
 .grid {
@@ -27,6 +41,12 @@ h1 {
     justify-content: center;
 }
 
-.grid div:hover {
+.grid div:hover,
+.reset-btn:hover {
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+.grid div:active,
+.reset-btn:active {
+    background-color: rgba(0, 0, 0, 0.4);
 }
