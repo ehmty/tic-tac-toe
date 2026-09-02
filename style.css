@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto/Roboto-Regular.woff2') format('woff2'),
+        url('fonts/Roboto/Roboto-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,37 +14,79 @@
     text-align: center;
 }
 
+body {
+    background-color: teal;
+    color: white;
+}
+
+
 h1,
 .reset-btn {
-    margin: 1rem;
+    margin: 1rem auto;
 }
 
 .reset-btn {
-    padding: 1rem;
+    padding: 0.5rem 1.5rem;
     border-radius: 10px;
     border: none;
 }
 
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+form button,
+input[type="text"] {
+    border: 2px solid white;
+    padding: 5px;
+    border-radius: 10px;
+    outline: none;
+}
+
+form button:hover,
+input[type="text"]:hover {
+    border: 2px solid orange;
+}
+
 p {
-    border: 2px solid black;
-    height: 1.5rem;
-    width: 150px;
+    border: 2px solid white;
+    border-radius: 10px;
+    height: 3rem;
+    width: 340px;
     text-align: center;
     margin: 1rem auto;
+    font-size: 2rem;
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 100px);
-    width: 300px;
+    width: max-content;
     margin: 0 auto;
+    gap: 20px;
+}
+
+.grid img {
+    filter: invert(1);
+}
+
+.cross-icon {
+    width: 70%;
+    height: 70%;
+}
+
+.circle-icon {
+    width: 55%;
+    height: 55%;
 }
 
 .grid div {
-    border: 1px solid black;
+    border: 2px solid orange;
     width: 100px;
     height: 100px;
-    font-size: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
