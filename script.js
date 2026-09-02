@@ -6,7 +6,7 @@ const createPlayer = function(name, marker) {
 };
 
 const Gameboard = (() => {
-    const board = ["","x","","","","","","",""];
+    const board = ["","","","","","","","",""];
     const getBoard = () => board;
     const resetBoard = () => board.fill("");
     const setMarker = (position, marker) => {
@@ -49,8 +49,20 @@ const winChecker = function(Gameboard) {
 }
 
 const Game = function(createPlayer, Gameboard, winChecker) {
-    const player1 = createPlayer("p1", "x");
-    const player2 = createPlayer("p2", "o");
+    let player1;
+    let player2;
+    const form = document.querySelector("form");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const p1Name = formData.get("player1");
+        const p2Name = formData.get("player2");
+        player1 = createPlayer(p1Name, "X");
+        player2 = createPlayer(p2Name, "O");
+        currentPlayer = player1;
+    })
+
     const {isDraw, hasWinner} = winChecker(Gameboard);
     let gameOver = false;
 
