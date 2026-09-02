@@ -9,8 +9,9 @@ const Gameboard = (() => {
     const board = ["","x","","","","","","",""];
     const getBoard = () => board;
     const setMarker = (position, marker) => {
-        if (board[position] !== "" || position > 8) return;
+        if (board[position] !== "" || position > 8) return false;
         board[position] = marker;
+        return true;
     };
 
     return {getBoard, setMarker };
@@ -61,11 +62,10 @@ const Game = function(createPlayer, Gameboard, winChecker) {
 const game1 = Game(createPlayer, Gameboard, winChecker);
 
 const displayController = function() {
-    let currentPlayer = game1.getCurrentPlayer();
     const board = Gameboard.getBoard();
-    const grid = document.querySelectorAll(".grid div");
-    grid.forEach((div, i) => {
-        div.textContent = board[i];
+    const cells = document.querySelectorAll(".grid div");
+    cells.forEach((cell, i) => {
+        cell.textContent = board[i];
     });
 };
 
