@@ -51,69 +51,102 @@ const winChecker = function(Gameboard) {
 const Game = function(createPlayer, Gameboard, winChecker) {
     let player1;
     let player2;
-    const form = document.querySelector("form");
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-        const p1Name = formData.get("player1");
-        const p2Name = formData.get("player2");
-        player1 = createPlayer(p1Name, "X");
-        player2 = createPlayer(p2Name, "O");
-        currentPlayer = player1;
-    })
+    let currentPlayer;
+    let gameOver = false;
+    let gameStarted = false;
 
     const {isDraw, hasWinner} = winChecker(Gameboard);
-    let gameOver = false;
-
-    let currentPlayer = player1;
+ 
     const getCurrentPlayer = () => currentPlayer;
     const setCurrentPlayer = () => { currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1; };
 
+    const startGame = (name1, name2) => {
+        player1 = createPlayer(name1, "X");
+        player2 = createPlayer(name2, "O");
+        currentPlayer = player1;
+        gameOver = false;
+        gameStarted = true;
+    }
+
     const resetGame = () => {
         Gameboard.resetBoard();
-        gameOver = false;
         currentPlayer = player1;
-        para.textContent = "";
-        displayController();
+        gameOver = false;
     };
 
-    const para = document.querySelector("p");
-    const cells = document.querySelectorAll(".grid div");
-    cells.forEach((cell, i) => cell.addEventListener("click", () => {
-        if (gameOver) return;
-        if (!Gameboard.setMarker(i, getCurrentPlayer().marker)) return;
-
-        displayController();
+    const playRound = (position) => {
+        if (!gameStarted || gameOver) return false;
+        if (!Gameboard.setMarker(position, getCurrentPlayer().marker)) return false;
         
         if (hasWinner()) {
             gameOver = true;
-            para.textContent = `${currentPlayer.name} hat gewonnen!`;
             currentPlayer.setScore();
-            return;
+            return "win";
         };
 
         if (isDraw()) {
             gameOver = true;
-            para.textContent = `Draw!`;
-            return;
+            return "draw";
         };
 
         setCurrentPlayer();
-    }));
+        return "continue";
+};
 
-    const resetBtn = document.querySelector(".reset-btn");
-    resetBtn.addEventListener("click", () => resetGame());
-
-    return {player1, player2, getCurrentPlayer, setCurrentPlayer, isDraw, hasWinner};
+    return {getCurrentPlayer, startGame, resetGame, playRound};
 };
 
 const game1 = Game(createPlayer, Gameboard, winChecker);
 
 const displayController = function() {
-    const board = Gameboard.getBoard();
     const cells = document.querySelectorAll(".grid div");
+    const status = document.querySelector(".game-status");
+    const resetBtn = document.querySelector(".reset-btn");
+    const form = document.querySelector("form");
+
+    const showboard = () => {
+        const board = Gameboard.getBoard();
+        cells.forEach((cell, i) => {
+            cell.textContent = board[i];
+        });
+    };
+
     cells.forEach((cell, i) => {
-        cell.textContent = board[i];
+        cell.addEventListener("click", () => {
+            const result = game1.playRound(i);
+            if (!result) return;
+            showboard();
+
+            if (result === "win") {
+                status.textContent = `${game1.getCurrentPlayer().name} hat gewonnen!`;
+            };
+            
+            if (result === "draw") {
+                status.textContent = "Draw!";
+            };
+        });
     });
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const name1 = formData.get("player1");
+        const name2 = formData.get("player2");
+        game1.startGame(name1, name2);
+
+        status.textContent = "";
+        showboard();
+
+    });
+
+    resetBtn.addEventListener("click", () => {
+        game1.resetGame();
+        
+        status.textContent = "";
+        showboard();
+    });
+
 };
+
+displayController();
