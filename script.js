@@ -8,13 +8,14 @@ const createPlayer = function(name, marker) {
 const Gameboard = (() => {
     const board = ["","x","","","","","","",""];
     const getBoard = () => board;
+    const resetBoard = () => board.fill("");
     const setMarker = (position, marker) => {
         if (board[position] !== "" || position > 8) return false;
         board[position] = marker;
         return true;
     };
 
-    return {getBoard, setMarker };
+    return {getBoard, setMarker, resetBoard};
 })();
 
 const winChecker = function(Gameboard) {
@@ -51,10 +52,19 @@ const Game = function(createPlayer, Gameboard, winChecker) {
     const player1 = createPlayer("p1", "x");
     const player2 = createPlayer("p2", "o");
     const {isDraw, hasWinner} = winChecker(Gameboard);
+    let gameOver = false;
 
     let currentPlayer = player1;
     const getCurrentPlayer = () => currentPlayer;
     const setCurrentPlayer = () => { currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1; };
+
+    const resetGame = () => {
+        Gameboard.resetBoard();
+        gameOver = false;
+        currentPlayer = player1;
+        para.textContent = "";
+        displayController();
+    };
 
     const para = document.querySelector("p");
     const cells = document.querySelectorAll(".grid div");
@@ -79,6 +89,9 @@ const Game = function(createPlayer, Gameboard, winChecker) {
 
         setCurrentPlayer();
     }));
+
+    const resetBtn = document.querySelector(".reset-btn");
+    resetBtn.addEventListener("click", () => resetGame());
 
     return {player1, player2, getCurrentPlayer, setCurrentPlayer, isDraw, hasWinner};
 };
