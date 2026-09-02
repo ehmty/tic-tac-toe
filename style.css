@@ -11,24 +11,23 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    text-align: center;
 }
 
 body {
     background-color: teal;
     color: white;
+    text-align: center;
 }
-
 
 h1,
 .reset-btn {
-    margin: 1rem auto;
+    margin: 1rem;
 }
 
 .reset-btn {
     padding: 0.5rem 1.5rem;
     border-radius: 10px;
-    border: none;
+    border: 2px solid white;
 }
 
 form {
@@ -43,12 +42,17 @@ input[type="text"] {
     border: 2px solid white;
     padding: 5px;
     border-radius: 10px;
-    outline: none;
 }
 
 form button:hover,
-input[type="text"]:hover {
+input[type="text"]:hover,
+.reset-btn:hover {
     border: 2px solid orange;
+}
+
+form button:active,
+.reset-btn:active {
+    background-color: orange;
 }
 
 p {
@@ -92,12 +96,10 @@ p {
     justify-content: center;
 }
 
-.grid div:hover,
-.reset-btn:hover {
+.grid div:hover {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-.grid div:active,
-.reset-btn:active {
+.grid div:active {
     background-color: rgba(0, 0, 0, 0.4);
 }
