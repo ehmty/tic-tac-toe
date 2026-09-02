@@ -11,12 +11,18 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-weight: 600;
+    color: white;
 }
 
 body {
     background-color: teal;
     color: white;
     text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
 }
 
 h1,
@@ -37,22 +43,36 @@ form {
     gap: 1rem;
 }
 
-form button,
-input[type="text"] {
-    border: 2px solid white;
-    padding: 5px;
-    border-radius: 10px;
+form label {
+    font-size: 1.3rem;
 }
 
-form button:hover,
-input[type="text"]:hover,
-.reset-btn:hover {
+form button,
+input[type="text"],
+.reset-btn {
     border: 2px solid orange;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: orange;
+}
+
+.reset-btn {
+    width: 100px;
 }
 
 form button:active,
 .reset-btn:active {
-    background-color: orange;
+    border: 2px solid white;
+}
+
+form button:hover,
+.reset-btn:hover {
+    background-color: rgba(255, 166, 0, 0.75);
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border: 2px solid white;
 }
 
 p {

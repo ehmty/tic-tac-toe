@@ -151,6 +151,7 @@ const displayController = function() {
         const name1 = formData.get("player1");
         const name2 = formData.get("player2");
         game1.startGame(name1, name2);
+        form.reset();
 
         status.textContent = "";
         showBoard();
