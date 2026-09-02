@@ -107,8 +107,24 @@ const displayController = function() {
 
     const showBoard = () => {
         const board = Gameboard.getBoard();
+
         cells.forEach((cell, i) => {
-            cell.textContent = board[i];
+            cell.textContent = "";
+            const img = document.createElement("img");
+
+            if (board[i] === "") return;
+
+            if (board[i] === "X") {
+                img.src = "icons/cross.svg";
+                img.classList.add("cross-icon");
+            };
+
+            if (board[i] === "O") {
+                img.src = "icons/circle.svg";
+                img.classList.add("circle-icon");
+            };
+
+            cell.appendChild(img);
         });
     };
 
