@@ -61,6 +61,7 @@ const Game = function(createPlayer, Gameboard, winChecker) {
     const setCurrentPlayer = () => { currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1; };
 
     const startGame = (name1, name2) => {
+        Gameboard.resetBoard();
         player1 = createPlayer(name1, "X");
         player2 = createPlayer(name2, "O");
         currentPlayer = player1;
@@ -104,7 +105,7 @@ const displayController = function() {
     const resetBtn = document.querySelector(".reset-btn");
     const form = document.querySelector("form");
 
-    const showboard = () => {
+    const showBoard = () => {
         const board = Gameboard.getBoard();
         cells.forEach((cell, i) => {
             cell.textContent = board[i];
@@ -115,7 +116,7 @@ const displayController = function() {
         cell.addEventListener("click", () => {
             const result = game1.playRound(i);
             if (!result) return;
-            showboard();
+            showBoard();
 
             if (result === "win") {
                 status.textContent = `${game1.getCurrentPlayer().name} hat gewonnen!`;
@@ -136,15 +137,15 @@ const displayController = function() {
         game1.startGame(name1, name2);
 
         status.textContent = "";
-        showboard();
+        showBoard();
 
     });
 
     resetBtn.addEventListener("click", () => {
         game1.resetGame();
-        
+
         status.textContent = "";
-        showboard();
+        showBoard();
     });
 
 };
