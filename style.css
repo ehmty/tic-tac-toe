@@ -75,14 +75,15 @@ form button:active,
 
 .board {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 180px auto 180px;
+    justify-content: center;
+    column-gap: 30px;
 }
 
 .player1-scoreboard,
 .player2-scoreboard {
     display: flex;
     flex-direction: column;
-    padding: 15px 40px;
     gap: 15px;
 }
 
@@ -106,8 +107,6 @@ form button:active,
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 100px);
-    width: max-content;
-    margin: 0 auto;
     gap: 15px;
 }
 
