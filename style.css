@@ -21,6 +21,7 @@ body {
     background-color: teal;
     color: white;
     text-align: center;
+    font-family: Roboto, system-ui, sans-serif;
 }
 
 h1 {
