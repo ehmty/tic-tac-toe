@@ -15,24 +15,36 @@
         <input type="text" id="player1" name="player1" required>
         <label for="player2">Player 2:</label>
         <input type="text" id="player2" name="player2" required>
-        <button type="submit">Start Game</button>
+        <button type="submit">New Game</button>
     </form>
 
     <p class="game-status"></p>
 
-    <div class="grid">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <div class="board">
+        <div class="player1-scoreboard">
+            <p class="player1-name"></p>
+            <p class="player1-score">0</p>
+        </div>
+
+        <div class="grid">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <div class="player2-scoreboard">
+            <p class="player2-name"></p>
+            <p class="player2-score">0</p>
+        </div>
     </div>
 
-    <button class="reset-btn">Restart</button>
+    <button class="reset-btn">Reset</button>
 
 </body>
 </html>
